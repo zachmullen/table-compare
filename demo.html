@@ -18,40 +18,71 @@
             ['Prostate3T-03-0002', 0.837, 0.905, 0.527, 0.789, 6, 3.5, 0.876, 0.886, 0.999, 0.999],
             ['Prostate3T-03-0001', 0.766, 0.862, 0.742, 1.003, 3.317, 3, 0.732, 0.902, 0.999, 0.998]
         ];
-        var baseline = new Array(data.length);
+        var baselineBinary = new Array(data.length);
+        var baselineInterp = new Array(data.length);
 
+        // Invent some random but sensible baseline data
         for (var i = 0; i < data.length; i++) {
-            baseline[i] = new Array(data[i].length);
-            baseline[i][0] = null;
+            baselineBinary[i] = new Array(data[i].length);
+            baselineInterp[i] = new Array(data[i].length);
+            baselineBinary[i][0] = null;
+            baselineInterp[i][0] = null;
             for (var j = 1; j < data[i].length; j++) {
-                baseline[i][j] = Math.random() * 2 * data[i][j];
+                // For binary coloring, each baseline is simply the threshold
+                // to distinguish between two classes.
+                baselineBinary[i][j] = Math.random() * 2 * data[i][j];
+
+                // For linear interpolation, each baseline value is a 2-tuple
+                // where the first value is the baseline and the second value is the
+                // slope of lightness as a function of scalar deviation from baseline.
+                baselineInterp[i][j] = [Math.random() * 2 * data[i][j], 1.5*data[i][j]];
             }
         }
 
         $(function () {
-            $('#compare-table-demo').compareTable(data, baseline, {
-                headers: headers
+            $('#compare-table-binary').compareTable(data, baselineBinary, {
+                headers: headers,
+                mode: 'binary'
+            });
+
+            $('#compare-table-linterp').compareTable(data, baselineInterp, {
+                headers: headers,
+                mode: 'linterp',
+                dynamicTextColor: true
             });
         });
     </script>
 
     <style>
-      #compare-table-demo {
-          background-color: #CDCDCD;
+      .compare-table-demo {
+          background-color: #cdcdcd;
           border-spacing: 1px;
           font-family: sans-serif;
+          margin-bottom: 20px;
       }
 
-      #compare-table-demo th {
+      .compare-table-demo th {
           padding: 4px 6px;
       }
 
-      #compare-table-demo td {
+      .compare-table-demo td {
           padding: 4px 6px;
+      }
+
+      div.header {
+          color: #555;
+          margin-bottom: 5px;
+          font-weight: bold;
+          font-family: sans-serif;
+          font-size: 20px;
       }
     </style>
   </head>
   <body>
-    <table id="compare-table-demo"></table>
+    <div class="header">Binary thresholding</div>
+    <table class="compare-table-demo" id="compare-table-binary"></table>
+
+    <div class="header">Deviation from baseline (linear interpolation)</div>
+    <table class="compare-table-demo" id="compare-table-linterp"></table>
   </body>
 </html>
