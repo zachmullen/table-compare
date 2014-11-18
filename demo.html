@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Table compare widget demo</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="table-compare.js"></script>
+    <script type="text/javascript">
+        var headers = ['Subject', 'Dice 1', 'Dice 2', 'Adb 1', 'Adb 2', 'Hdb 1', 'Hdb 2', 'Sens 1', 'Sens 2', 'Spec 1', 'Spec 2'];
+        var data = [
+            ['averages', 0.68, 0.821, 1.694, 1.507, 8.604, 6.729, 0.698, 0.848, 0.998, 0.998],
+            ['ProstateDx-03-0005', 0.695, 0.836, 1.871, 1.677, 8.762, 4.558, 0.767, 0.756, 0.998, 0.999],
+            ['ProstateDx-03-0004', 0.699, 0.764, 2.965, 2.429, 18.252, 16.501, 0.789, 0.876, 0.997, 0.997],
+            ['ProstateDx-03-0003', 0.697, 0.773, 1.686, 1.736, 7.502, 7.486, 0.747, 0.766, 0.998, 0.999],
+            ['ProstateDx-03-0002', 0.348, 0.652, 3.278, 2.376, 12.193, 9.358, 0.346, 0.695, 0.997, 0.996],
+            ['ProstateDx-03-0001', 0.651, 0.828, 3.067, 1.994, 15.799, 10.5, 0.856, 0.774, 0.994, 0.998],
+            ['Prostate3T-03-0005', 0.672, 0.786, 0.774, 1.205, 3.937, 5.196, 0.555, 0.939, 1, 0.998],
+            ['Prostate3T-03-0004', 0.812, 0.909, 0.769, 0.609, 3.937, 3.162, 0.751, 0.947, 0.999, 0.999],
+            ['Prostate3T-03-0003', 0.625, 0.891, 1.256, 1.253, 6.344, 4.031, 0.559, 0.941, 0.999, 0.995],
+            ['Prostate3T-03-0002', 0.837, 0.905, 0.527, 0.789, 6, 3.5, 0.876, 0.886, 0.999, 0.999],
+            ['Prostate3T-03-0001', 0.766, 0.862, 0.742, 1.003, 3.317, 3, 0.732, 0.902, 0.999, 0.998]
+        ];
+        var baseline = new Array(data.length);
+
+        for (var i = 0; i < data.length; i++) {
+            baseline[i] = new Array(data[i].length);
+            baseline[i][0] = null;
+            for (var j = 1; j < data[i].length; j++) {
+                baseline[i][j] = Math.random();
+            }
+        }
+
+        $(function () {
+            $('#compare-table-demo').compareTable(data, baseline, {
+                headers: headers
+            });
+        });
+    </script>
+
+    <style>
+      #compare-table-demo {
+          background-color: #CDCDCD;
+          border-spacing: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="compare-table-demo"></table>
+  </body>
+</html>
