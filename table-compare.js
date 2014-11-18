@@ -115,7 +115,7 @@
             hsl = rgbToHsl(opts.lowColor.r, opts.lowColor.g, opts.lowColor.b);
             hsl[2] = 1 + delta / baseline[1];
         }
-        hsl[2] = Math.max(hsl[2], 0);
+        hsl[2] = Math.max(hsl[2], 0.25);
         hsl[2] = Math.min(hsl[2], 1);
         var rgb = hslToRgb(hsl[0], hsl[1], hsl[2]);
         return {r: rgb[0], g: rgb[1], b: rgb[2]};
