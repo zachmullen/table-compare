@@ -79,8 +79,8 @@
             headers: null,
             styleAttribute: 'backgroundColor',
             mode: 'binary',
-            highColor: '#a44',
-            lowColor: '#4a4',
+            highColor: '#c75',
+            lowColor: '#7ad',
             nullColor: '#fff'
         };
         $.extend(opts, config || {});

@@ -24,7 +24,7 @@
             baseline[i] = new Array(data[i].length);
             baseline[i][0] = null;
             for (var j = 1; j < data[i].length; j++) {
-                baseline[i][j] = Math.random();
+                baseline[i][j] = Math.random() * 2 * data[i][j];
             }
         }
 
@@ -39,6 +39,15 @@
       #compare-table-demo {
           background-color: #CDCDCD;
           border-spacing: 1px;
+          font-family: sans-serif;
+      }
+
+      #compare-table-demo th {
+          padding: 4px 6px;
+      }
+
+      #compare-table-demo td {
+          padding: 4px 6px;
       }
     </style>
   </head>
