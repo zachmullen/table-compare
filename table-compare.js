@@ -2,7 +2,9 @@
     'use strict';
 
     var rgbToHsl = function (r, g, b) {
-        r /= 255, g /= 255, b /= 255;
+        r /= 255;
+        g /= 255;
+        b /= 255;
         var max = Math.max(r, g, b), min = Math.min(r, g, b);
         var h, s, l = (max + min) / 2;
 
@@ -25,7 +27,7 @@
     var hslToRgb = function (h, s, l) {
         var r, g, b;
 
-        if (s == 0){
+        if (s === 0){
             r = g = b = l; // achromatic
         } else {
             var hue2rgb = function (p, q, t) {
@@ -35,7 +37,7 @@
                 if(t < 1/2) return q;
                 if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
                 return p;
-            }
+            };
 
             var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
             var p = 2 * l - q;
@@ -135,7 +137,7 @@
     $.fn.compareTable = function (data, baseline, config) {
         var el = $(this);
         if (!el.is('table')) {
-            console.error('Error: compareTable should only be called on a table element.')
+            console.error('Error: compareTable should only be called on a table element.');
             return;
         }
 
